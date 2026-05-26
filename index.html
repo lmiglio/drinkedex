@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DrinkDex — Pokémon Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #2a2a2a;
+            color: #1a1a1a;
+            min-height: 100vh;
+            padding: 30px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .menu {
+            width: 210mm;
+            height: 297mm;
+            background: #f4f0e6;
+            padding: 10mm 12mm;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            border: 5px solid #cc0000;
+            overflow: hidden;
+        }
+
+        /* Pokédex header */
+        .pokedex-header {
+            background: #cc0000;
+            margin: -10mm -12mm 7mm -12mm;
+            padding: 10px 18px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            border-bottom: 3px solid #1a1a1a;
+        }
+
+        .pokeball-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: linear-gradient(to bottom, #ffffff 0%, #ffffff 48%, #1a1a1a 48%, #1a1a1a 52%, #cc0000 52%, #cc0000 100%);
+            border: 3px solid #1a1a1a;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .pokeball-icon::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background: #ffffff;
+            border: 1.5px solid #1a1a1a;
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        .header-text {
+            color: #ffffff;
+            flex: 1;
+        }
+
+        .header-text .title {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 18px;
+            letter-spacing: 1.5px;
+            text-shadow: 2px 2px 0 #1a1a1a;
+        }
+
+        .header-text .subtitle {
+            font-family: 'VT323', monospace;
+            font-size: 16px;
+            letter-spacing: 1px;
+            margin-top: 3px;
+        }
+
+        .lights {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .light {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 1.5px solid #1a1a1a;
+        }
+
+        .light.red { background: #ff5555; }
+        .light.yellow { background: #ffdd33; }
+        .light.green { background: #66dd66; }
+
+        /* Sections */
+        .sections {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            justify-content: space-between;
+        }
+
+        .section-title {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 10px;
+            color: #ffffff;
+            background: #1a1a1a;
+            padding: 5px 10px;
+            letter-spacing: 1.5px;
+            margin-bottom: 5px;
+            display: inline-block;
+            align-self: flex-start;
+            border-left: 3px solid #cc0000;
+        }
+
+        /* Drink card */
+        .drink {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding: 5px 10px;
+            background: #ffffff;
+            border: 2px solid #1a1a1a;
+            border-radius: 5px;
+            margin-bottom: 4px;
+            box-shadow: 2px 2px 0 #1a1a1a;
+        }
+
+        .sprite-box {
+            width: 50px;
+            height: 50px;
+            background: #e8f4f8;
+            border: 2px solid #1a1a1a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .sprite-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            image-rendering: pixelated;
+        }
+
+        .drink-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .drink-header {
+            display: flex;
+            align-items: baseline;
+            gap: 7px;
+            margin-bottom: 2px;
+        }
+
+        .pokedex-num {
+            font-family: 'VT323', monospace;
+            font-size: 15px;
+            color: #8a8a8a;
+            font-weight: bold;
+        }
+
+        .pokemon-name {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 13px;
+            color: #cc0000;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.15);
+        }
+
+        .drink-name {
+            font-family: 'VT323', monospace;
+            font-size: 14px;
+            color: #555555;
+            font-style: italic;
+            letter-spacing: 0.5px;
+            margin-left: auto;
+        }
+
+        .drink-variants {
+            font-family: 'Inter', sans-serif;
+            font-size: 10px;
+            color: #555555;
+            font-style: italic;
+            margin-bottom: 2px;
+        }
+
+        .drink-bottom {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            justify-content: space-between;
+        }
+
+        .drink-description {
+            font-family: 'VT323', monospace;
+            font-size: 13px;
+            color: #333333;
+            line-height: 1.1;
+            flex: 1;
+        }
+
+        /* Type badges */
+        .types {
+            display: flex;
+            gap: 3px;
+            flex-shrink: 0;
+        }
+
+        .type {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 7px;
+            color: #ffffff;
+            padding: 3px 6px;
+            border-radius: 3px;
+            border: 1.5px solid #1a1a1a;
+            letter-spacing: 0.5px;
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.3);
+        }
+
+        .type.fire { background: #ee8130; }
+        .type.water { background: #6390f0; }
+        .type.ice { background: #5fb3c4; }
+        .type.electric { background: #d4a017; }
+        .type.psychic { background: #f95587; }
+        .type.grass { background: #7ac74c; }
+        .type.poison { background: #a33ea1; }
+        .type.flying { background: #a98ff3; }
+        .type.fairy { background: #d685ad; }
+        .type.dragon { background: #6f35fc; }
+        .type.normal { background: #a8a878; }
+
+        /* Footer */
+        .footer {
+            margin: 7mm -12mm -10mm -12mm;
+            padding: 10px 18px;
+            background: #1a1a1a;
+            color: #ffffff;
+            text-align: center;
+            font-family: 'VT323', monospace;
+            font-size: 16px;
+            letter-spacing: 2px;
+            border-top: 3px solid #cc0000;
+        }
+
+        .footer .hearts {
+            color: #ff5555;
+            margin: 0 6px;
+        }
+
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+                display: block;
+            }
+            .menu {
+                box-shadow: none;
+                width: 210mm;
+                height: 297mm;
+                margin: 0;
+                page-break-after: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="menu">
+        <div class="pokedex-header">
+            <div class="pokeball-icon"></div>
+            <div class="header-text">
+                <div class="title">DRINKDEX</div>
+            </div>
+            <div class="lights">
+                <div class="light red"></div>
+                <div class="light yellow"></div>
+                <div class="light green"></div>
+            </div>
+        </div>
+
+        <div class="sections">
+
+            <div>
+                <div class="section-title">▶ Cocktails</div>
+
+                <div class="drink">
+                    <div class="sprite-box">
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png" alt="Charizard">
+                    </div>
+                    <div class="drink-info">
+                        <div class="drink-header">
+                            <span class="pokedex-num">#006</span>
+                            <span class="pokemon-name">CHARIZARD</span>
+                            <span class="drink-name">Aperol Spritz</span>
+                        </div>
+                        <div class="drink-variants">prosecco · Aperol · soda · arancia</div>
+                        <div class="drink-bottom">
+                            <div class="drink-description">"Fiamma arancione e dolceamara. L'inizio della festa."</div>
+                            <div class="types">
+                                <span class="type fire">FIRE</span>
+                                <span class="type flying">FLY</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="drink">
+                    <div class="sprite-box">
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/126.png" alt="Magmar">
+                    </div>
+                    <div class="drink-info">
+                        <div class="drink-header">
+                            <span class="pokedex-num">#126</span>
+                            <span class="pokemon-name">MAGMAR</span>
+                            <span class="drink-name">Campari Spritz</span>
+                        </div>
+                        <div class="drink-variants">prosecco · Campari · soda · arancia</div>
+                        <div class="drink-bottom">
+                            <div class="drink-description">"Rosso lavico, amaro intenso. Per palati audaci."</div>
+                            <div class="types">
+                                <span class="type fire">FIRE</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="drink">
+                    <div class="sprite-box">
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/144.png" alt="Articuno">
+                    </div>
+                    <div class="drink-info">
+                        <div class="drink-header">
+                            <span class="pokedex-num">#144</span>
+                            <span class="pokemon-name">ARTICUNO</span>
+                            <span class="drink-name">Venturo Spritz</span>
+                        </div>
+                        <div class="drink-variants">prosecco · Venturo · soda · arancia</div>
+                        <div class="drink-bottom">
+                            <div class="drink-description">"Ghiaccio leggendario ed elegante. Botaniche raffinate, sapore profondo."</div>
+                            <div class="types">
+                                <span class="type ice">ICE</span>
+                                <span class="type flying">FLY</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="drink">
+                    <div class="sprite-box">
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/470.png" alt="Leafeon">
+                    </div>
+                    <div class="drink-info">
+                        <div class="drink-header">
+                            <span class="pokedex-num">#470</span>
+                            <span class="pokemon-name">LEAFEON</span>
+                            <span class="drink-name">Gin 77 Tonic</span>
+                        </div>
+                        <div class="drink-variants">Gin 77 (Angola) · tonica · lemongrass</div>
+                        <div class="drink-bottom">
+                            <div class="drink-description">"Foglia di lemongrass al vento. Citrino, erbaceo, vivo."</div>
+                            <div class="types">
+                                <span class="type grass">GRASS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="drink">
+                    <div class="sprite-box">
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/700.png" alt="Sylveon">
+                    </div>
+                    <div class="drink-info">
+                        <div class="drink-header">
+                            <span class="pokedex-num">#700</span>
+                            <span class="pokemon-name">SYLVEON</span>
+                            <span class="drink-name">Gin Roku Tonic</span>
+                        </div>
+                        <div class="drink-variants">Gin Roku (Japan) · tonica · yuzu</div>
+                        <div class="drink-bottom">
+                            <div class="drink-description">"Sei botaniche giapponesi danzano come petali di sakura."</div>
+                            <div class="types">
+                                <span class="type fairy">FAIRY</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="section-title">▶ Birre</div>
+
+                <div class="drink">
+                    <div class="sprite-box">
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/128.png" alt="Tauros">
+                    </div>
+                    <div class="drink-info">
+                        <div class="drink-header">
+                            <span class="pokedex-num">#128</span>
+                            <span class="pokemon-name">TAUROS</span>
+                            <span class="drink-name">Always Standing</span>
+                        </div>
+                        <div class="drink-variants">Buttiga · Blanche · frumento, leggera, speziata</div>
+                        <div class="drink-bottom">
+                            <div class="drink-description">"Sempre in piedi, sempre carico. La forza che non si arrende."</div>
+                            <div class="types">
+                                <span class="type normal">NORMAL</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="drink">
+                    <div class="sprite-box">
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/150.png" alt="Mewtwo">
+                    </div>
+                    <div class="drink-info">
+                        <div class="drink-header">
+                            <span class="pokedex-num">#150</span>
+                            <span class="pokemon-name">MEWTWO</span>
+                            <span class="drink-name">Psycho IPA</span>
+                        </div>
+                        <div class="drink-variants">Buttiga · IPA · luppolata, amara, intensa</div>
+                        <div class="drink-bottom">
+                            <div class="drink-description">"Potenza mentale pura. Amara, intensa, leggendaria."</div>
+                            <div class="types">
+                                <span class="type psychic">PSY</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="drink">
+                    <div class="sprite-box">
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="Pikachu">
+                    </div>
+                    <div class="drink-info">
+                        <div class="drink-header">
+                            <span class="pokedex-num">#025</span>
+                            <span class="pokemon-name">PIKACHU</span>
+                            <span class="drink-name">Peroni Chill Lemon</span>
+                        </div>
+                        <div class="drink-variants">lager con limone · frizzante e dissetante</div>
+                        <div class="drink-bottom">
+                            <div class="drink-description">"Una scossa gialla di freschezza. Pika-pika!"</div>
+                            <div class="types">
+                                <span class="type electric">ELEC</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="section-title">▶ Analcolici</div>
+
+                <div class="drink">
+                    <div class="sprite-box">
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/145.png" alt="Zapdos">
+                    </div>
+                    <div class="drink-info">
+                        <div class="drink-header">
+                            <span class="pokedex-num">#145</span>
+                            <span class="pokemon-name">ZAPDOS</span>
+                            <span class="drink-name">Corona Cero</span>
+                        </div>
+                        <div class="drink-variants">birra analcolica · servita con lime</div>
+                        <div class="drink-bottom">
+                            <div class="drink-description">"Tuono senza temporale. Energia pura, zero alcol."</div>
+                            <div class="types">
+                                <span class="type electric">ELEC</span>
+                                <span class="type flying">FLY</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="drink">
+                    <div class="sprite-box">
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/182.png" alt="Bellossom">
+                    </div>
+                    <div class="drink-info">
+                        <div class="drink-header">
+                            <span class="pokedex-num">#182</span>
+                            <span class="pokemon-name">BELLOSSOM</span>
+                            <span class="drink-name">Kombucha Zenzero &amp; Limone</span>
+                        </div>
+                        <div class="drink-variants">tè fermentato · zenzero · limone</div>
+                        <div class="drink-bottom">
+                            <div class="drink-description">"Fiori gialli che fermentano al sole. Pizzica e profuma."</div>
+                            <div class="types">
+                                <span class="type grass">GRASS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="drink">
+                    <div class="sprite-box">
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/315.png" alt="Roselia">
+                    </div>
+                    <div class="drink-info">
+                        <div class="drink-header">
+                            <span class="pokedex-num">#315</span>
+                            <span class="pokemon-name">ROSELIA</span>
+                            <span class="drink-name">Kombucha Frutti Rossi</span>
+                        </div>
+                        <div class="drink-variants">tè fermentato · frutti di bosco</div>
+                        <div class="drink-bottom">
+                            <div class="drink-description">"Bouquet di rose e bacche rosse. Naturale, vivo, frizzante."</div>
+                            <div class="types">
+                                <span class="type grass">GRASS</span>
+                                <span class="type poison">POISON</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer">
+            <span class="hearts">♥</span> HAPPY BIRTHDAY · GOTTA SIP 'EM ALL <span class="hearts">♥</span>
+        </div>
+    </div>
+</body>
+</html>
