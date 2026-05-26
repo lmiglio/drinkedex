@@ -14,45 +14,38 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: #2a2a2a;
+            background: #1a1a1a;
             color: #1a1a1a;
             min-height: 100vh;
-            padding: 30px 20px;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
+            line-height: 1.4;
         }
 
         .menu {
-            width: 210mm;
-            height: 297mm;
             background: #f4f0e6;
-            padding: 10mm 12mm;
-            position: relative;
+            min-height: 100vh;
+            padding: 18px 14px;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-            border: 5px solid #cc0000;
-            overflow: hidden;
+            position: relative;
         }
 
         /* Pokédex header */
         .pokedex-header {
             background: #cc0000;
-            margin: -10mm -12mm 7mm -12mm;
-            padding: 10px 18px;
+            margin: -18px -14px 14px -14px;
+            padding: 12px 16px;
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
             border-bottom: 3px solid #1a1a1a;
         }
 
         .pokeball-icon {
-            width: 34px;
-            height: 34px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             background: linear-gradient(to bottom, #ffffff 0%, #ffffff 48%, #1a1a1a 48%, #1a1a1a 52%, #cc0000 52%, #cc0000 100%);
-            border: 3px solid #1a1a1a;
+            border: 2.5px solid #1a1a1a;
             position: relative;
             flex-shrink: 0;
         }
@@ -63,10 +56,10 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 10px;
-            height: 10px;
+            width: 11px;
+            height: 11px;
             background: #ffffff;
-            border: 1.5px solid #1a1a1a;
+            border: 2px solid #1a1a1a;
             border-radius: 50%;
             z-index: 2;
         }
@@ -78,16 +71,9 @@
 
         .header-text .title {
             font-family: 'Press Start 2P', monospace;
-            font-size: 18px;
+            font-size: 22px;
             letter-spacing: 1.5px;
             text-shadow: 2px 2px 0 #1a1a1a;
-        }
-
-        .header-text .subtitle {
-            font-family: 'VT323', monospace;
-            font-size: 16px;
-            letter-spacing: 1px;
-            margin-top: 3px;
         }
 
         .lights {
@@ -97,8 +83,8 @@
         }
 
         .light {
-            width: 10px;
-            height: 10px;
+            width: 11px;
+            height: 11px;
             border-radius: 50%;
             border: 1.5px solid #1a1a1a;
         }
@@ -112,18 +98,17 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            justify-content: space-between;
+            gap: 16px;
         }
 
         .section-title {
             font-family: 'Press Start 2P', monospace;
-            font-size: 10px;
+            font-size: 12px;
             color: #ffffff;
             background: #1a1a1a;
-            padding: 5px 10px;
+            padding: 6px 12px;
             letter-spacing: 1.5px;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
             display: inline-block;
             align-self: flex-start;
             border-left: 3px solid #cc0000;
@@ -133,18 +118,18 @@
         .drink {
             display: flex;
             align-items: center;
-            gap: 11px;
-            padding: 5px 10px;
+            gap: 14px;
+            padding: 10px 12px;
             background: #ffffff;
             border: 2px solid #1a1a1a;
-            border-radius: 5px;
-            margin-bottom: 4px;
-            box-shadow: 2px 2px 0 #1a1a1a;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            box-shadow: 3px 3px 0 #1a1a1a;
         }
 
         .sprite-box {
-            width: 50px;
-            height: 50px;
+            width: 70px;
+            height: 70px;
             background: #e8f4f8;
             border: 2px solid #1a1a1a;
             border-radius: 50%;
@@ -170,20 +155,21 @@
         .drink-header {
             display: flex;
             align-items: baseline;
-            gap: 7px;
-            margin-bottom: 2px;
+            gap: 4px 8px;
+            margin-bottom: 4px;
+            flex-wrap: wrap;
         }
 
         .pokedex-num {
             font-family: 'VT323', monospace;
-            font-size: 15px;
+            font-size: 17px;
             color: #8a8a8a;
             font-weight: bold;
         }
 
         .pokemon-name {
             font-family: 'Press Start 2P', monospace;
-            font-size: 13px;
+            font-size: 14px;
             color: #cc0000;
             letter-spacing: 1px;
             text-shadow: 1px 1px 0 rgba(0,0,0,0.15);
@@ -191,49 +177,49 @@
 
         .drink-name {
             font-family: 'VT323', monospace;
-            font-size: 14px;
+            font-size: 16px;
             color: #555555;
             font-style: italic;
             letter-spacing: 0.5px;
-            margin-left: auto;
+            flex-basis: 100%;
+            margin-top: -2px;
         }
 
         .drink-variants {
             font-family: 'Inter', sans-serif;
-            font-size: 10px;
+            font-size: 12px;
             color: #555555;
             font-style: italic;
-            margin-bottom: 2px;
+            margin-bottom: 4px;
         }
 
         .drink-bottom {
             display: flex;
-            align-items: center;
-            gap: 7px;
-            justify-content: space-between;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 6px;
         }
 
         .drink-description {
             font-family: 'VT323', monospace;
-            font-size: 13px;
+            font-size: 15px;
             color: #333333;
-            line-height: 1.1;
-            flex: 1;
+            line-height: 1.15;
         }
 
         /* Type badges */
         .types {
             display: flex;
-            gap: 3px;
+            gap: 4px;
             flex-shrink: 0;
         }
 
         .type {
             font-family: 'Press Start 2P', monospace;
-            font-size: 7px;
+            font-size: 9px;
             color: #ffffff;
-            padding: 3px 6px;
-            border-radius: 3px;
+            padding: 4px 7px;
+            border-radius: 4px;
             border: 1.5px solid #1a1a1a;
             letter-spacing: 0.5px;
             text-shadow: 1px 1px 0 rgba(0,0,0,0.3);
@@ -253,8 +239,8 @@
 
         /* Footer */
         .footer {
-            margin: 7mm -12mm -10mm -12mm;
-            padding: 10px 18px;
+            margin: 14px -14px -18px -14px;
+            padding: 14px 16px;
             background: #1a1a1a;
             color: #ffffff;
             text-align: center;
@@ -266,116 +252,56 @@
 
         .footer .hearts {
             color: #ff5555;
-            margin: 0 6px;
+            margin: 0 8px;
         }
 
-        /* Mobile responsive */
-        @media (max-width: 768px) {
+        /* Desktop enhancement */
+        @media (min-width: 768px) {
             body {
-                background: #1a1a1a;
-                padding: 0;
-                align-items: stretch;
+                background: #2a2a2a;
+                padding: 32px 20px;
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
             }
             .menu {
+                max-width: 720px;
                 width: 100%;
-                height: auto;
-                min-height: 100vh;
-                padding: 18px 14px;
-                border-width: 0;
-                box-shadow: none;
+                min-height: 0;
+                padding: 24px 22px;
+                border: 5px solid #cc0000;
+                border-radius: 8px;
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
             }
             .pokedex-header {
-                margin: -18px -14px 14px -14px;
-                padding: 12px 16px;
-                gap: 12px;
-            }
-            .pokeball-icon {
-                width: 38px;
-                height: 38px;
-            }
-            .header-text .title {
-                font-size: 22px;
-            }
-            .sections {
-                gap: 16px;
-                justify-content: flex-start;
-            }
-            .section-title {
-                font-size: 12px;
-                padding: 6px 12px;
-                margin-bottom: 10px;
-                letter-spacing: 1.5px;
-            }
-            .drink {
-                padding: 10px 12px;
-                gap: 14px;
-                margin-bottom: 8px;
-                box-shadow: 3px 3px 0 #1a1a1a;
-            }
-            .sprite-box {
-                width: 70px;
-                height: 70px;
-            }
-            .drink-header {
-                flex-wrap: wrap;
-                gap: 4px 8px;
-                margin-bottom: 4px;
-            }
-            .pokedex-num {
-                font-size: 17px;
-            }
-            .pokemon-name {
-                font-size: 14px;
-            }
-            .drink-name {
-                font-size: 16px;
-                margin-left: 0;
-                flex-basis: 100%;
-                margin-top: -2px;
-            }
-            .drink-variants {
-                font-size: 12px;
-                margin-bottom: 4px;
-            }
-            .drink-bottom {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 6px;
-            }
-            .drink-description {
-                font-size: 15px;
-            }
-            .types {
-                align-self: flex-start;
-            }
-            .type {
-                font-size: 9px;
-                padding: 4px 7px;
+                margin: -24px -22px 18px -22px;
+                padding: 14px 20px;
             }
             .footer {
-                margin: 14px -14px -18px -14px;
-                padding: 14px 16px;
-                font-size: 16px;
+                margin: 18px -22px -24px -22px;
+                padding: 14px 20px;
             }
-        }
-
-        @page {
-            size: A4;
-            margin: 0;
-        }
-
-        @media print {
-            body {
-                background: white;
-                padding: 0;
-                display: block;
+            .header-text .title { font-size: 24px; }
+            .pokeball-icon { width: 42px; height: 42px; }
+            .pokeball-icon::after { width: 12px; height: 12px; }
+            .light { width: 12px; height: 12px; }
+            .sections { gap: 20px; }
+            .section-title { font-size: 13px; padding: 7px 14px; }
+            .drink {
+                gap: 16px;
+                padding: 12px 14px;
             }
-            .menu {
-                box-shadow: none;
-                width: 210mm;
-                height: 297mm;
-                margin: 0;
-                page-break-after: avoid;
+            .sprite-box { width: 80px; height: 80px; }
+            .pokemon-name { font-size: 15px; }
+            .drink-name { font-size: 17px; }
+            .drink-description { font-size: 16px; flex: 1; }
+            .drink-variants { font-size: 13px; }
+            .pokedex-num { font-size: 18px; }
+            .drink-bottom {
+                flex-direction: row;
+                align-items: center;
+                gap: 10px;
+                justify-content: space-between;
             }
         }
     </style>
